@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tranquillitas</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sage:        '#A8C5A0',
+            'sage-dark': '#7FA878',
+            lav:         '#C9B8D8',
+            'lav-dark':  '#9B85B8',
+            coral:       '#E8A598',
+            cream:       '#F5F2EC',
+          },
+          fontFamily: {
+            serif: ['"DM Serif Display"', 'serif'],
+            sans:  ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+
+    /* blob drift */
+    .blob { animation: drift 10s ease-in-out infinite alternate; }
+    .blob-2 { animation-delay: 3s; }
+    .blob-3 { animation-delay: 6s; }
+    @keyframes drift {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(18px, 28px) scale(1.06); }
+    }
+
+    /* fade up */
+    .fade-up { animation: fadeUp 0.7s ease both; }
+    .d1{animation-delay:.05s} .d2{animation-delay:.15s}
+    .d3{animation-delay:.25s} .d4{animation-delay:.35s}
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* float */
+    .float-a { animation: floatY 4s ease-in-out infinite; }
+    .float-b { animation: floatY 4s ease-in-out 2s infinite; }
+    @keyframes floatY {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-9px); }
+    }
+
+    /* bar fill */
+    .bar-anim { animation: barFill 1.4s ease 0.9s both; }
+    @keyframes barFill { from { width: 0 !important; } }
+
+    /* logo dot */
+    .logo-dot { animation: dotPulse 2.5s ease-in-out infinite; }
+    @keyframes dotPulse {
+      0%,100% { transform: scale(1); opacity:1; }
+      50%      { transform: scale(1.5); opacity:0.5; }
+    }
+
+    /* italic underline */
+    .italic-line { position: relative; display: inline; }
+    .italic-line::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, #C9B8D8, #A8C5A0);
+      border-radius: 2px;
+    }
+
+    hr.soft { border: none; border-top: 1.5px solid rgba(0,0,0,0.08); }
+
+    /* card hover */
+    .value-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .value-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+
+    /* scroll offset biar ga ketutup navbar */
+    section { scroll-margin-top: 80px; }
+  </style>
+</head>
+
+<body class="bg-cream min-h-screen overflow-x-hidden">
+
+  <!-- BG BLOBS -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div class="blob absolute w-[480px] h-[480px] bg-lav rounded-full blur-[90px] opacity-25 -top-28 right-0"></div>
+    <div class="blob blob-2 absolute w-[360px] h-[360px] bg-sage rounded-full blur-[80px] opacity-25 bottom-0 -left-16"></div>
+    <div class="blob blob-3 absolute w-[240px] h-[240px] bg-coral rounded-full blur-[70px] opacity-20 top-1/2 right-1/3"></div>
+  </div>
+
+  <!-- ═══════════════ NAVBAR ═══════════════ -->
+  <nav class="sticky top-0 z-50 flex items-center justify-between px-12 py-6 bg-cream/80 backdrop-blur-sm border-b border-black/5">
+    <a href="#beranda" class="flex items-center gap-2 font-serif text-2xl text-gray-800 no-underline">
+      <span class="logo-dot w-6 h-6 rounded-full inline-block"
+            style="background: radial-gradient(circle at 35% 35%, #E8A598, #c97b6b)"></span>
+      Tranquillitas
+    </a>
+    <ul class="flex items-center gap-10 list-none m-0 p-0">
+      <li><a href="#beranda" class="text-gray-500 text-sm font-medium hover:text-gray-800 transition-colors no-underline">Beranda</a></li>
+      <li><a href="#tentang" class="text-gray-500 text-sm font-medium hover:text-gray-800 transition-colors no-underline">Tentang</a></li>
+      <li><a href="#konten"  class="text-gray-500 text-sm font-medium hover:text-gray-800 transition-colors no-underline">Konten</a></li>
+      <li><a href="#kontak"  class="text-gray-500 text-sm font-medium hover:text-gray-800 transition-colors no-underline">Kontak</a></li>
+      <li>
+        <a href="#konten" class="bg-gray-900 text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-sage-dark transition-all hover:-translate-y-0.5 no-underline">
+          Mulai Sekarang
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- ═══════════════════════════════════════
+       SECTION 1 — BERANDA
+  ════════════════════════════════════════ -->
+  <section id="beranda" class="relative z-10">
+
+    <div class="grid grid-cols-2 gap-12 items-center px-12 py-14 min-h-[calc(100vh-76px)]">
+
+      <!-- LEFT -->
+      <div class="flex flex-col gap-6">
+
+        <div class="fade-up d1">
+          <div class="inline-flex items-center gap-2 bg-sage/20 border border-sage/40 text-sage-dark text-xs font-bold uppercase tracking-widest px-5 py-2 rounded-full">
+            <span class="w-1.5 h-1.5 bg-sage-dark rounded-full"></span>
+            Safe Space untuk Kesehatan Mental Remaja
+          </div>
+        </div>
+
+        <h1 class="fade-up d1 font-serif text-[2.8rem] leading-[1.15] text-gray-900">
+          Satu retakan kecil bukan<br>
+          berarti kamu <span class="italic text-lav-dark italic-line">Hancur,</span> itu<br>
+          hanya tanda kamu sedang<br>
+          <span class="text-sage-dark">Tumbuh.</span>
+        </h1>
+
+        <hr class="soft fade-up d2 w-full" />
+
+        <p class="fade-up d2 text-gray-500 leading-relaxed text-sm max-w-sm">
+          <span class="font-semibold text-gray-800">Tranquillitas</span> hadir sebagai ruang aman bagi remaja untuk memahami, mengelola, dan merawat kesehatan mental mereka. Karena setiap perasaan itu valid.
+        </p>
+
+        <div class="fade-up d3 flex flex-col gap-3 mt-8">
+          <div class="text-center pb-3 border-b border-black/8">
+            <div class="font-serif text-3xl text-gray-900">1 dari 3</div>
+            <div class="text-xs text-gray-400 mt-0.5">remaja Indonesia alami masalah mental</div>
+          </div>
+          <div class="grid grid-cols-2 divide-x divide-black/8">
+            <div class="text-center pr-4">
+              <div class="font-serif text-2xl text-gray-900">70–80%</div>
+              <div class="text-xs text-gray-400 mt-0.5 leading-snug">tidak mendapat<br>bantuan yang tepat</div>
+            </div>
+            <div class="text-center pl-4">
+              <div class="font-serif text-2xl text-gray-900">Gratis</div>
+              <div class="text-xs text-gray-400 mt-0.5 leading-snug">untuk semua<br>kalangan remaja</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fade-up d4 flex gap-3 mt-16">
+          <a href="#konten" class="flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-sage-dark transition-all hover:-translate-y-0.5 shadow-lg shadow-black/15 no-underline">
+            Jelajahi Sekarang →
+          </a>
+          <a href="#tentang" class="flex items-center gap-2 border border-black/15 text-gray-700 px-6 py-3 rounded-full text-sm font-semibold hover:border-sage-dark hover:bg-sage/10 transition-all hover:-translate-y-0.5 no-underline">
+            Cek Kondisimu
+          </a>
+        </div>
+
+      </div>
+
+      <!-- RIGHT — Card Visual -->
+      <div class="fade-up d3 relative flex justify-center items-center">
+
+        <div class="float-a absolute -top-4 -left-8 bg-white rounded-2xl px-4 py-2.5 shadow-xl flex items-center gap-2 text-sm font-semibold text-gray-700 z-20 whitespace-nowrap">
+          <span>🌿</span> Kamu tidak sendirian
+        </div>
+
+        <div class="float-b absolute -bottom-2 -right-8 bg-white rounded-2xl px-4 py-2.5 shadow-xl flex items-center gap-2 text-sm font-semibold text-gray-700 z-20 whitespace-nowrap">
+          <span>💜</span> 2.4rb+ remaja terbantu
+        </div>
+
+        <div class="bg-white rounded-3xl p-8 w-[340px] shadow-2xl shadow-black/10 relative z-10">
+
+          <div class="flex items-center justify-between mb-5">
+            <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl"
+                 style="background: linear-gradient(135deg, #A8C5A0, #C9B8D8)">🧠</div>
+            <span class="text-xs font-semibold text-sage-dark bg-sage/15 px-3 py-1.5 rounded-full">Hari ini</span>
+          </div>
+
+          <h3 class="font-serif text-lg text-gray-800 mb-1">Cek Kondisi Mentalmu</h3>
+          <p class="text-xs text-gray-400 leading-relaxed mb-5">
+            Pahami bagaimana perasaanmu hari ini.<br>Tidak ada jawaban yang salah.
+          </p>
+
+          <div class="flex flex-col gap-3.5 mb-6">
+            <div>
+              <div class="flex justify-between text-xs font-semibold text-gray-600 mb-1.5">
+                <span>😌 Ketenangan</span><span>72%</span>
+              </div>
+              <div class="h-2 bg-black/5 rounded-full overflow-hidden">
+                <div class="bar-anim h-full rounded-full" style="width:72%; background: linear-gradient(90deg,#A8C5A0,#7FA878)"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs font-semibold text-gray-600 mb-1.5">
+                <span>🎯 Fokus</span><span>55%</span>
+              </div>
+              <div class="h-2 bg-black/5 rounded-full overflow-hidden">
+                <div class="bar-anim h-full rounded-full" style="width:55%; background: linear-gradient(90deg,#C9B8D8,#9B85B8)"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs font-semibold text-gray-600 mb-1.5">
+                <span>😰 Kecemasan</span><span>38%</span>
+              </div>
+              <div class="h-2 bg-black/5 rounded-full overflow-hidden">
+                <div class="bar-anim h-full rounded-full" style="width:38%; background: linear-gradient(90deg,#E8A598,#d97b6b)"></div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="soft mb-4" />
+
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-gray-400 font-medium">✦ Bukan diagnosis medis</span>
+            <button class="bg-gray-900 text-white text-xs font-semibold px-4 py-2 rounded-full hover:bg-sage-dark transition-colors">
+              Mulai →
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="relative z-10 flex items-center gap-4 px-12 pb-6 text-[10px] uppercase tracking-widest text-gray-400 font-semibold">
+      <div class="flex-1 h-px bg-black/6"></div>
+      scroll ke bawah untuk mengenal lebih lanjut
+      <div class="flex-1 h-px bg-black/6"></div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SECTION 2 — TENTANG
+  ════════════════════════════════════════ -->
+  <section id="tentang" class="relative z-10">
+
+    <!-- Hero About -->
+    <div class="grid grid-cols-2 gap-16 items-center px-12 py-20">
+
+      <div class="flex flex-col gap-6">
+        <div class="inline-flex items-center gap-2 bg-sage/20 border border-sage/40 text-sage-dark text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full w-fit">
+          <span class="w-1.5 h-1.5 bg-sage-dark rounded-full"></span>
+          Tentang Kami
+        </div>
+
+        <h2 class="font-serif text-[3rem] leading-[1.15] text-gray-900">
+          Kami percaya setiap<br>
+          remaja berhak untuk<br>
+          <span class="italic text-lav-dark">didengar.</span>
+        </h2>
+
+        <hr class="soft" />
+
+        <p class="text-gray-500 leading-relaxed text-sm">
+          <span class="font-semibold text-gray-800">Tranquillitas</span> lahir dari keprihatinan terhadap tingginya angka masalah kesehatan mental remaja di Indonesia yang kerap tidak terdeteksi dan tidak tertangani. Kami hadir bukan sebagai pengganti profesional, melainkan sebagai langkah pertama — ruang yang aman, hangat, dan bebas stigma.
+        </p>
+
+        <p class="text-gray-500 leading-relaxed text-sm">
+          Nama <span class="font-semibold text-gray-800">Tranquillitas</span> berasal dari bahasa Latin yang berarti <em>ketenangan</em>. Sebuah pengingat bahwa damai itu bukan hal yang mustahil — ia hanya butuh dirawat, perlahan.
+        </p>
+
+        <div class="flex gap-3 mt-2">
+          <a href="#konten" class="flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-sage-dark transition-all hover:-translate-y-0.5 no-underline">
+            Lihat Konten →
+          </a>
+          <a href="#kontak" class="flex items-center gap-2 border border-black/15 text-gray-700 px-6 py-3 rounded-full text-sm font-semibold hover:border-sage-dark hover:bg-sage/10 transition-all hover:-translate-y-0.5 no-underline">
+            Hubungi Kami
+          </a>
+        </div>
+      </div>
+
+      <div class="flex justify-center items-center">
+        <img
+          src="https://illustrations.popsy.co/amber/man-meditating.svg"
+          alt="Ilustrasi kesehatan mental"
+          class="w-full max-w-sm drop-shadow-lg"
+        />
+      </div>
+
+    </div>
+
+    <hr class="soft mx-12" />
+
+    <!-- Misi & Visi -->
+    <div class="px-12 py-16">
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-2 bg-lav/20 border border-lav/40 text-lav-dark text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4">
+          ✦ Misi & Visi
+        </div>
+        <h3 class="font-serif text-[2.2rem] text-gray-900">Mengapa kami ada?</h3>
+      </div>
+
+      <div class="grid grid-cols-2 gap-8">
+        <div class="value-card bg-white rounded-3xl p-8 shadow-md shadow-black/5">
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl mb-5"
+               style="background: linear-gradient(135deg, #A8C5A0, #C9B8D8)">🎯</div>
+          <h4 class="font-serif text-xl text-gray-800 mb-3">Misi</h4>
+          <p class="text-sm text-gray-500 leading-relaxed">
+            Menyediakan informasi yang akurat, mudah dipahami, dan bebas stigma seputar kesehatan mental remaja. Kami ingin menjadi jembatan antara remaja yang membutuhkan bantuan dengan sumber daya yang tepat.
+          </p>
+          <ul class="mt-4 flex flex-col gap-2">
+            <li class="flex items-center gap-2 text-xs text-gray-500 font-medium">
+              <span class="w-5 h-5 bg-sage/20 text-sage-dark rounded-full flex items-center justify-center text-xs">✓</span>
+              Edukasi berbasis fakta, bukan stigma
+            </li>
+            <li class="flex items-center gap-2 text-xs text-gray-500 font-medium">
+              <span class="w-5 h-5 bg-sage/20 text-sage-dark rounded-full flex items-center justify-center text-xs">✓</span>
+              Konten yang relevan untuk remaja Indonesia
+            </li>
+            <li class="flex items-center gap-2 text-xs text-gray-500 font-medium">
+              <span class="w-5 h-5 bg-sage/20 text-sage-dark rounded-full flex items-center justify-center text-xs">✓</span>
+              Menghubungkan dengan bantuan profesional
+            </li>
+          </ul>
+        </div>
+
+        <div class="value-card bg-white rounded-3xl p-8 shadow-md shadow-black/5">
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl mb-5"
+               style="background: linear-gradient(135deg, #C9B8D8, #E8A598)">🌱</div>
+          <h4 class="font-serif text-xl text-gray-800 mb-3">Visi</h4>
+          <p class="text-sm text-gray-500 leading-relaxed">
+            Mewujudkan generasi muda Indonesia yang sadar, peduli, dan mampu merawat kesehatan mental mereka sendiri — sehingga tidak ada lagi remaja yang merasa sendirian dalam perjuangannya.
+          </p>
+          <div class="mt-5 p-4 bg-lav/15 rounded-2xl">
+            <p class="text-xs text-lav-dark font-semibold italic leading-relaxed">
+              "Satu langkah kecil untuk memahami dirimu adalah langkah besar menuju kesembuhan."
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="soft mx-12" />
+
+    <!-- Nilai-nilai -->
+    <div class="px-12 py-16">
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4"
+             style="color:#c97b6b; border: 1px solid #E8A598; background: #E8A59820">
+          ✦ Nilai Kami
+        </div>
+        <h3 class="font-serif text-[2.2rem] text-gray-900">Yang kami pegang teguh</h3>
+      </div>
+
+      <div class="grid grid-cols-3 gap-6">
+        <div class="value-card bg-white rounded-2xl p-6 shadow-sm shadow-black/5 text-center">
+          <div class="text-3xl mb-3">🤍</div>
+          <h5 class="font-serif text-lg text-gray-800 mb-2">Tanpa Stigma</h5>
+          <p class="text-xs text-gray-400 leading-relaxed">Setiap perasaan valid. Tidak ada yang lemah karena meminta bantuan.</p>
+        </div>
+        <div class="value-card bg-white rounded-2xl p-6 shadow-sm shadow-black/5 text-center">
+          <div class="text-3xl mb-3">🔒</div>
+          <h5 class="font-serif text-lg text-gray-800 mb-2">Aman & Nyaman</h5>
+          <p class="text-xs text-gray-400 leading-relaxed">Ruang yang bebas dari penghakiman, terbuka untuk semua cerita.</p>
+        </div>
+        <div class="value-card bg-white rounded-2xl p-6 shadow-sm shadow-black/5 text-center">
+          <div class="text-3xl mb-3">📚</div>
+          <h5 class="font-serif text-lg text-gray-800 mb-2">Berbasis Fakta</h5>
+          <p class="text-xs text-gray-400 leading-relaxed">Informasi yang kami sajikan bersumber dari referensi kesehatan terpercaya.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="px-12 pb-16">
+      <div class="bg-white rounded-3xl p-10 shadow-md shadow-black/5 grid grid-cols-2 gap-10 items-center">
+        <div>
+          <h3 class="font-serif text-[2rem] text-gray-900 mb-4">
+            Bersama, kita bisa<br>
+            <span class="italic text-sage-dark">memutus siklus ini.</span>
+          </h3>
+          <p class="text-sm text-gray-500 leading-relaxed mb-6">
+            Kesehatan mental bukan hal yang tabu. Semakin banyak remaja yang sadar dan berani bicara, semakin besar harapan kita bersama untuk generasi yang lebih sehat secara mental.
+          </p>
+          <div class="flex gap-8">
+            <div class="text-center">
+              <div class="font-serif text-3xl text-gray-900">2.4rb+</div>
+              <div class="text-xs text-gray-400 mt-0.5">Remaja terbantu</div>
+            </div>
+            <div class="w-px bg-black/8"></div>
+            <div class="text-center">
+              <div class="font-serif text-3xl text-gray-900">50+</div>
+              <div class="text-xs text-gray-400 mt-0.5">Artikel & tips</div>
+            </div>
+            <div class="w-px bg-black/8"></div>
+            <div class="text-center">
+              <div class="font-serif text-3xl text-gray-900">10+</div>
+              <div class="text-xs text-gray-400 mt-0.5">Sumber hotline</div>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-center">
+          <img
+            src="https://illustrations.popsy.co/amber/woman-meditating.svg"
+            alt="Ilustrasi meditasi"
+            class="w-64 drop-shadow-md"
+          />
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SECTION 3 — KONTEN (placeholder)
+  ════════════════════════════════════════ -->
+  <section id="konten" class="relative z-10 px-12 py-20">
+    <div class="text-center">
+      <div class="inline-flex items-center gap-2 bg-sage/20 border border-sage/40 text-sage-dark text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-6">
+        ✦ Konten
+      </div>
+      <h3 class="font-serif text-[2.5rem] text-gray-900">Coming soon...</h3>
+      <p class="text-gray-400 text-sm mt-3">Section konten sedang dalam pengerjaan.</p>
+    </div>
+  </section>
+
+  <hr class="soft mx-12" />
+
+  <!-- ═══════════════════════════════════════
+       SECTION 4 — KONTAK (placeholder)
+  ════════════════════════════════════════ -->
+  <section id="kontak" class="relative z-10 px-12 py-20">
+    <div class="text-center">
+      <div class="inline-flex items-center gap-2 bg-lav/20 border border-lav/40 text-lav-dark text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-6">
+        ✦ Kontak
+      </div>
+      <h3 class="font-serif text-[2.5rem] text-gray-900">Coming soon...</h3>
+      <p class="text-gray-400 text-sm mt-3">Section kontak sedang dalam pengerjaan.</p>
+    </div>
+  </section>
+
+</body>
+</html>

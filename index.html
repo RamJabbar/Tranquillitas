@@ -3,1226 +3,167 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tranquillitas - Ruang Aman untuk Kesehatan Mental Remaja</title>
-   <!-- ─── PRIMARY META ─── -->
-  <meta name="description" content="Tranquillitas adalah ruang aman digital bagi remaja Indonesia untuk memahami, mengelola, dan merawat kesehatan mental mereka. Bebas stigma, berbasis fakta."/>
-  <meta name="keywords"    content="kesehatan mental remaja, mental health, anxiety, depresi, self-care, mindfulness, Indonesia"/>
-  <meta name="author"      content="Tranquillitas"/>
-  <meta name="robots"      content="index, follow"/>
-  <meta name="theme-color" content="#F5F2EC"/>
-
-  <!-- ─── OPEN GRAPH (WhatsApp, Facebook, LinkedIn preview) ─── -->
-  <meta property="og:type"        content="website"/>
-  <meta property="og:url"         content="https://tranquillitas.netlify.app/"/>
-  <meta property="og:title"       content="Tranquillitas — Ruang Aman Kesehatan Mental Remaja"/>
-  <meta property="og:description" content="Ruang aman digital bagi remaja Indonesia untuk memahami dan merawat kesehatan mental mereka. Bebas stigma, berbasis fakta, gratis."/>
-  <meta property="og:image"       content="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=1200&q=80"/>
-  <meta property="og:locale"      content="id_ID"/>
-
-  <!-- ─── TWITTER CARD ─── -->
-  <meta name="twitter:card"        content="summary_large_image"/>
-  <meta name="twitter:title"       content="Tranquillitas — Ruang Aman Kesehatan Mental Remaja"/>
-  <meta name="twitter:description" content="Ruang aman digital bagi remaja Indonesia untuk memahami dan merawat kesehatan mental mereka."/>
-  <meta name="twitter:image"       content="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=1200&q=80"/>
+  <title>Tranquillitas</title>
 
   <!-- ─── FAVICON (SVG inline — dot coral Tranquillitas) ─── -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23F5F2EC'/><circle cx='16' cy='16' r='9' fill='url(%23g)'/><defs><radialGradient id='g' cx='35%25' cy='35%25' r='65%25'><stop offset='0' stop-color='%23E8A598'/><stop offset='1' stop-color='%23c97b6b'/></radialGradient></defs></svg>"/>
   <link rel="alternate icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23F5F2EC'/><circle cx='16' cy='16' r='9' fill='%23E8A598'/></svg>"/>
-
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            sage:        '#A8C5A0',
-            'sage-dark': '#7FA878',
-            lav:         '#C9B8D8',
-            'lav-dark':  '#9B85B8',
-            coral:       '#E8A598',
-            cream:       '#F5F2EC',
-          },
-          fontFamily: {
-            serif: ['"DM Serif Display"', 'serif'],
-            sans:  ['"Plus Jakarta Sans"', 'sans-serif'],
-          },
-        }
-      }
-    }
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
 
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* blob drift */
-    .blob { animation: drift 10s ease-in-out infinite alternate; }
-    .blob-2 { animation-delay: 3s; }
-    .blob-3 { animation-delay: 6s; }
-    @keyframes drift {
-      from { transform: translate(0,0) scale(1); }
-      to   { transform: translate(18px, 28px) scale(1.06); }
+    body { background: #F5F2EC; overflow: hidden; }
+
+    /* Wrapper yang bakal slide ke atas */
+    #splashWrapper {
+      position        : fixed;
+      inset           : 0;
+      z-index         : 9999;
+      display         : flex;
+      align-items     : center;
+      justify-content : center;
+      background      : #F5F2EC;
     }
 
-    /* fade up */
-    .fade-up { animation: fadeUp 0.7s ease both; }
-    .d1{animation-delay:.05s} .d2{animation-delay:.15s}
-    .d3{animation-delay:.25s} .d4{animation-delay:.35s}
+    /* Blobs */
+    .blob {
+      position      : absolute;
+      border-radius : 50%;
+      filter        : blur(80px);
+      animation     : drift 10s ease-in-out infinite alternate;
+    }
+    .blob-1 { width:380px; height:380px; background:#C9B8D8; opacity:0.3; top:-100px; right:-80px; }
+    .blob-2 { width:300px; height:300px; background:#A8C5A0; opacity:0.3; bottom:-80px; left:-60px; animation-delay:3s; }
+    .blob-3 { width:200px; height:200px; background:#E8A598; opacity:0.2; top:45%; right:25%; animation-delay:6s; }
+
+    @keyframes drift {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(20px,25px) scale(1.05); }
+    }
+
+    @keyframes dotPulse {
+      0%,100% { transform: scale(1);   opacity: 1; }
+      50%     { transform: scale(1.4); opacity: 0.5; }
+    }
+
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(22px); }
+      from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* float */
-    .float-a { animation: floatY 4s ease-in-out infinite; }
-    .float-b { animation: floatY 4s ease-in-out 2s infinite; }
-    .float-c { animation: floatY 2s ease-in-out 1s infinite; }
-    @keyframes floatY {
-      0%,100% { transform: translateY(0); }
-      50%      { transform: translateY(-9px); }
+    /* Animasi slide ke atas keluar */
+    @keyframes slideUpOut {
+      from { transform: translateY(0); }
+      to   { transform: translateY(-100vh); }
     }
 
-    /* bar fill */
-    .bar-anim { animation: barFill 1.4s ease 0.9s both; }
-    @keyframes barFill { from { width: 0 !important; } }
+    #splashWrapper.leaving {
+      animation: slideUpOut 1s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+    }
 
-    /* logo dot */
+    /* Konten */
+    .splash-content {
+      position       : relative;
+      z-index        : 10;
+      display        : flex;
+      flex-direction : column;
+      align-items    : center;
+      gap            : 20px;
+    }
+
+    .logo-row {
+      display     : flex;
+      align-items : center;
+      gap         : 14px;
+      animation   : fadeUp 0.9s ease 0.2s both;
+    }
+
     .logo-dot {
-      width: 2px; height: 2px; 
-      animation: dotPulse 3.8s ease-in-out infinite; }
-    @keyframes dotPulse {
-      0%,100% { transform: scale(0.6); opacity:1; }
-      50%      { transform: scale(1.2); opacity:0.5; }
+      width         : 22px;
+      height        : 22px;
+      border-radius : 50%;
+      background    : radial-gradient(circle at 35% 35%, #E8A598, #c97b6b);
+      animation     : dotPulse 2.5s ease-in-out infinite;
     }
 
-    /* italic underline */
-    .italic-line { position: relative; display: inline; }
-    .italic-line::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0;
-      width: 100%; height: 3px;
-      background: linear-gradient(90deg, #C9B8D8, #A8C5A0);
-      border-radius: 2px;
+    .logo-text {
+      font-family    : 'DM Serif Display', serif;
+      font-size      : 3rem;
+      color          : #1f2937;
+      letter-spacing : -0.02em;
     }
 
-    hr.soft { border: none; border-top: 1.5px solid rgba(0,0,0,0.08); }
-
-    @keyframes marquee {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    .marquee-track {
-      display: flex;
-      gap: 28px;
-      width: max-content;
-      animation: marquee 29s linear infinite;
-    }
-    .marquee-track:hover {
-      animation-play-state: paused;
+    .tagline {
+      font-size      : 12px;
+      color          : #9ca3af;
+      font-weight    : 500;
+      letter-spacing : 0.1em;
+      text-transform : uppercase;
+      animation      : fadeUp 0.9s ease 0.45s both;
     }
 
-    /* card hover */
-    .value-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
-    .value-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
-
-    /* scroll offset biar ga ketutup navbar */
-    section { scroll-margin-top: 80px; }
-
-    /* ─── MOBILE HAMBURGER ─── */
-    .mobile-menu { display: none; }
-    .mobile-menu.open { display: flex; }
-
-    /* ─── MOBILE NAV OVERLAY ─── */
-    @media (max-width: 768px) {
-      .desktop-nav { display: none !important; }
-      .hamburger-btn { display: flex !important; }
-    }
-    @media (min-width: 769px) {
-      .hamburger-btn { display: none !important; }
+    .bar-wrap {
+      width         : 180px;
+      height        : 2px;
+      background    : rgba(0,0,0,0.08);
+      border-radius : 999px;
+      overflow      : hidden;
+      margin-top    : 4px;
+      animation     : fadeUp 0.9s ease 0.65s both;
     }
 
-    /* ─── RESPONSIVE FIXES ─── */
-    @media (max-width: 768px) {
-
-      /* navbar */
-      nav { padding: 14px 20px; }
-
-      /* hero section */
-      .hero-grid {
-        grid-template-columns: 1fr !important;
-        gap: 32px !important;
-        padding: 24px 20px !important;
-        min-height: unset !important;
-      }
-      .hero-title { font-size: 2rem !important; }
-      .hero-right { display: none !important; }
-      .hero-cta { margin-top: 8px !important; }
-      .hero-stats { margin-top: 4px !important; }
-      .scroll-hint { padding: 0 20px 20px !important; }
-
-      /* about section */
-      .about-grid {
-        grid-template-columns: 1fr !important;
-        gap: 24px !important;
-        padding: 40px 20px !important;
-      }
-      .about-img-col { display: none !important; }
-      .about-heading { font-size: 2.2rem !important; }
-      .visi-misi-grid {
-        grid-template-columns: 1fr !important;
-        gap: 16px !important;
-      }
-      .nilai-grid {
-        grid-template-columns: 1fr !important;
-        gap: 12px !important;
-      }
-      .about-cta-grid {
-        grid-template-columns: 1fr !important;
-        gap: 24px !important;
-      }
-      .about-cta-stats { flex-wrap: wrap; gap: 16px !important; }
-      .about-cta-img { display: none !important; }
-      .section-px { padding-left: 20px !important; padding-right: 20px !important; }
-      .section-py-sm { padding-top: 40px !important; padding-bottom: 40px !important; }
-
-      /* konten section */
-      .konten-px { padding: 40px 20px !important; }
-      .myths-grid {
-        grid-template-columns: 1fr !important;
-        gap: 16px !important;
-      }
-      .booster-inner {
-        flex-direction: column !important;
-        gap: 24px !important;
-      }
-      .booster-heading { font-size: 1.4rem !important; }
-      .booster-side { flex-direction: row !important; gap: 12px !important; }
-
-      /* kata mereka */
-      .testi-grid {
-        grid-template-columns: 1fr !important;
-        gap: 16px !important;
-      }
-
-      /* kontak */
-      .kontak-grid {
-        grid-template-columns: 1fr !important;
-        gap: 24px !important;
-      }
-
-      /* footer */
-      .footer-inner {
-        flex-direction: column !important;
-        gap: 16px !important;
-        align-items: center !important;
-        text-align: center !important;
-      }
-      .footer-links { flex-wrap: wrap; justify-content: center; }
-
-      /* headings */
-      .section-heading { font-size: 1.8rem !important; }
-
-      /* badge */
-      .badge-wrap { justify-content: center; }
+    .bar-fill {
+      height        : 100%;
+      width         : 0%;
+      border-radius : 999px;
+      background    : linear-gradient(90deg, #A8C5A0, #C9B8D8, #E8A598);
+      transition    : width 3.4s cubic-bezier(0.75, 0, 0.24, 1);
     }
 
-    @media (max-width: 480px) {
-      .hero-title { font-size: 1.7rem !important; }
-      .about-heading { font-size: 1.8rem !important; }
-      .section-heading { font-size: 1.6rem !important; }
-      .booster-heading { font-size: 1.2rem !important; }
+    .quote {
+      font-family : 'DM Serif Display', serif;
+      font-size   : 13px;
+      color       : #c8bfb3;
+      font-style  : italic;
+      margin-top  : 4px;
+      animation   : fadeUp 0.9s ease 0.85s both;
     }
-
-       /* ─── SCROLL REVEAL ─── */
-    .sr {
-      opacity: 0;
-      will-change: transform, opacity;
-      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .sr.sr-visible {
-      opacity: 1 !important;
-      transform: none !important;
-    }
-    .sr-up    { transform: translateY(60px); }
-    .sr-down  { transform: translateY(-40px); }
-    .sr-left  { transform: translateX(-60px); }
-    .sr-right { transform: translateX(60px); }
-    .sr-scale { transform: scale(0.88); }
-    .sr-zoom  { transform: scale(0.92) translateY(30px); }
-
-    /* respect reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      .sr {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-      }
-    }
-
   </style>
 </head>
 
-<body class="bg-cream min-h-screen overflow-x-hidden">
+<body>
 
-  <!-- BG BLOBS -->
-  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-    <div class="blob absolute w-[480px] h-[480px] bg-lav rounded-full blur-[90px] opacity-25 -top-28 right-0"></div>
-    <div class="blob blob-2 absolute w-[360px] h-[360px] bg-sage rounded-full blur-[80px] opacity-25 bottom-0 -left-16"></div>
-    <div class="blob blob-3 absolute w-[240px] h-[240px] bg-coral rounded-full blur-[70px] opacity-20 top-1/2 right-1/3"></div>
+  <div id="splashWrapper">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <div class="splash-content">
+      <div class="logo-row">
+        <div class="logo-dot"></div>
+        <span class="logo-text">Tranquillitas</span>
+      </div>
+      <p class="tagline">Ruang aman untuk kesehatan mentalmu</p>
+      <div class="bar-wrap">
+        <div class="bar-fill" id="barFill"></div>
+      </div>
+      <p class="quote">"Satu langkah kecil sudah cukup untuk hari ini."</p>
+    </div>
   </div>
 
-  <!-- ═══════════════ NAVBAR ═══════════════ -->
-  <nav class="sticky top-0 z-50 flex items-center justify-between px-12 py-6 bg-cream/80 backdrop-blur-sm border-b border-black/5">
-    <a href="#beranda" class="flex items-center gap-2 font-serif text-2xl text-gray-800 no-underline">
-      <span class="logo-dot w-6 h-6 rounded-full inline-block"
-            style="background: radial-gradient(circle at 35% 35%, #E8A598, #c97b6b)"></span>
-      Tranquillitas
-    </a>
-
-    <!-- Desktop Nav -->
-    <ul class="desktop-nav flex items-center gap-10 list-none m-0 p-0">
-      <li><a href="#beranda" class="text-gray-500 text-sm font-medium hover:text-gray-800 transition-colors no-underline">Beranda</a></li>
-      <li><a href="#tentang" class="text-gray-500 text-sm font-medium hover:text-gray-800 transition-colors no-underline">Tentang</a></li>
-      <li><a href="#konten"  class="text-gray-500 text-sm font-medium hover:text-gray-800 transition-colors no-underline">Konten</a></li>
-      <li><a href="#kata-mereka" class="text-gray-500 text-sm font-medium hover:text-gray-800 transition-colors no-underline">Kata Mereka</a></li>
-      <li><a href="#kontak"  class="text-gray-500 text-sm font-medium hover:text-gray-800 transition-colors no-underline">Kontak</a></li>
-      <li>
-        <a href="#konten" class="bg-gray-900 text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-sage-dark transition-all hover:-translate-y-0.5 no-underline">
-          Mulai Sekarang
-        </a>
-      </li>
-    </ul>
-
-    <!-- Hamburger Button -->
-    <button class="hamburger-btn hidden flex-col gap-1.5 p-2 rounded-xl hover:bg-black/5 transition-colors" id="hamburgerBtn" aria-label="Menu">
-      <span class="w-6 h-0.5 bg-gray-700 rounded-full transition-all" id="bar1"></span>
-      <span class="w-6 h-0.5 bg-gray-700 rounded-full transition-all" id="bar2"></span>
-      <span class="w-5 h-0.5 bg-gray-700 rounded-full transition-all" id="bar3"></span>
-    </button>
-  </nav>
-
-  <!-- Mobile Menu Overlay -->
-  <div class="mobile-menu fixed inset-0 z-40 bg-cream/95 backdrop-blur-md flex-col items-center justify-center gap-8 text-center" id="mobileMenu">
-    <a href="#beranda" class="mobile-nav-link font-serif text-3xl text-gray-800 no-underline hover:text-sage-dark transition-colors">Beranda</a>
-    <a href="#tentang" class="mobile-nav-link font-serif text-3xl text-gray-800 no-underline hover:text-sage-dark transition-colors">Tentang</a>
-    <a href="#konten"  class="mobile-nav-link font-serif text-3xl text-gray-800 no-underline hover:text-sage-dark transition-colors">Konten</a>
-    <a href="#kata-mereka" class="mobile-nav-link font-serif text-3xl text-gray-800 no-underline hover:text-sage-dark transition-colors">Kata Mereka</a>
-    <a href="#kontak"  class="mobile-nav-link font-serif text-3xl text-gray-800 no-underline hover:text-sage-dark transition-colors">Kontak</a>
-    <a href="#konten" class="mobile-nav-link mt-4 bg-gray-900 text-white text-base font-semibold px-8 py-3 rounded-full hover:bg-sage-dark transition-all no-underline">
-      Mulai Sekarang
-    </a>
-  </div>
-
-  <!-- ═══════════════════════════════════════
-       SECTION 1 — BERANDA
-  ════════════════════════════════════════ -->
-  <section id="beranda" class="relative z-10">
-
-    <div class="hero-grid grid grid-cols-2 gap-12 items-center px-12 py-14 min-h-[calc(100vh-76px)]">
-
-      <!-- LEFT -->
-      <div class="flex flex-col gap-6">
-
-        <div class="fade-up d1">
-          <div class="inline-flex items-center gap-2 bg-sage/20 border border-sage/40 text-sage-dark text-xs font-bold uppercase tracking-widest px-5 py-2 rounded-full">
-            <span class="w-1.5 h-1.5 bg-sage-dark rounded-full"></span>
-            Safe Space untuk Kesehatan Mental Remaja
-          </div>
-        </div>
-
-        <h1 class="hero-title fade-up d1 font-serif text-[2.8rem] leading-[1.15] text-gray-900">
-          Satu retakan kecil bukan<br>
-          berarti kamu <span class="italic text-lav-dark italic-line">Hancur,</span> itu<br>
-          hanya tanda kamu sedang<br>
-          <span class="text-sage-dark">Tumbuh.</span>
-        </h1>
-
-        <hr class="soft fade-up d2 w-full" />
-
-        <p class="fade-up d2 text-gray-500 leading-relaxed text-sm max-w-sm">
-          <span class="font-semibold text-gray-800">Tranquillitas</span> hadir sebagai ruang aman bagi remaja untuk memahami, mengelola, dan merawat kesehatan mental mereka. Karena setiap perasaan itu valid.
-        </p>
-
-        <div class="hero-stats fade-up d3 flex flex-col gap-3 mt-8">
-          <div class="text-center pb-3 border-b border-black/8">
-            <div class="font-serif text-3xl text-gray-900">1 dari 3</div>
-            <div class="text-xs text-gray-400 mt-0.5">remaja Indonesia alami masalah mental</div>
-          </div>
-          <div class="grid grid-cols-2 divide-x divide-black/8">
-            <div class="text-center pr-4">
-              <div class="font-serif text-2xl text-gray-900">70–80%</div>
-              <div class="text-xs text-gray-400 mt-0.5 leading-snug">tidak mendapat<br>bantuan yang tepat</div>
-            </div>
-            <div class="text-center pl-4">
-              <div class="font-serif text-2xl text-gray-900">Gratis</div>
-              <div class="text-xs text-gray-400 mt-0.5 leading-snug">untuk semua<br>kalangan remaja</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-cta fade-up d4 flex flex-wrap gap-3 mt-16">
-          <a href="#konten" class="flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-sage-dark transition-all hover:-translate-y-0.5 shadow-lg shadow-black/15 no-underline">
-            Jelajahi Sekarang →
-          </a>
-          <a href="#tentang" class="flex items-center gap-2 border border-black/15 text-gray-700 px-6 py-3 rounded-full text-sm font-semibold hover:border-sage-dark hover:bg-sage/10 transition-all hover:-translate-y-0.5 no-underline">
-            Cek Kondisimu
-          </a>
-        </div>
-
-      </div>
-
-      <!-- RIGHT — Card Visual -->
-      <div class="hero-right fade-up d3 relative flex justify-center items-center">
-
-        <div class="float-a absolute -top-4 -left-8 bg-white rounded-2xl px-4 py-2.5 shadow-xl flex items-center gap-2 text-sm font-semibold text-gray-700 z-20 whitespace-nowrap">
-          <span>🌿</span> Kamu tidak sendirian
-        </div>
-
-        <div class="float-b absolute -bottom-2 -right-8 bg-white rounded-2xl px-4 py-2.5 shadow-xl flex items-center gap-2 text-sm font-semibold text-gray-700 z-20 whitespace-nowrap">
-          <span>💜</span> 2.4rb+ remaja terbantu
-        </div>
-
-        <div class="bg-white rounded-3xl p-8 w-[340px] shadow-2xl shadow-black/10 relative z-10 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
-
-          <div class="flex items-center justify-between mb-5">
-            <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl"
-                 style="background: linear-gradient(135deg, #A8C5A0, #C9B8D8)">🧠</div>
-            <span class="text-xs font-semibold text-sage-dark bg-sage/15 px-3 py-1.5 rounded-full">Hari ini</span>
-          </div>
-          
-          <h3 class="font-serif text-lg text-gray-800 mb-1">Cek Kondisi Mentalmu</h3>
-          <p class="text-xs text-gray-400 leading-relaxed mb-5">
-            Pahami bagaimana perasaanmu hari ini.<br>Tidak ada jawaban yang salah.
-          </p>
-
-          <div class="flex flex-col gap-3.5 mb-6">
-            <div>
-              <div class="flex justify-between text-xs font-semibold text-gray-600 mb-1.5">
-                <span>😌 Ketenangan</span><span>72%</span>
-              </div>
-              <div class="h-2 bg-black/5 rounded-full overflow-hidden">
-                <div class="bar-anim h-full rounded-full" style="width:72%; background: linear-gradient(90deg,#A8C5A0,#7FA878)"></div>
-              </div>
-            </div>
-            <div>
-              <div class="flex justify-between text-xs font-semibold text-gray-600 mb-1.5">
-                <span>🎯 Fokus</span><span>55%</span>
-              </div>
-              <div class="h-2 bg-black/5 rounded-full overflow-hidden">
-                <div class="bar-anim h-full rounded-full" style="width:55%; background: linear-gradient(90deg,#C9B8D8,#9B85B8)"></div>
-              </div>
-            </div>
-            <div>
-              <div class="flex justify-between text-xs font-semibold text-gray-600 mb-1.5">
-                <span>😰 Kecemasan</span><span>38%</span>
-              </div>
-              <div class="h-2 bg-black/5 rounded-full overflow-hidden">
-                <div class="bar-anim h-full rounded-full" style="width:38%; background: linear-gradient(90deg,#E8A598,#d97b6b)"></div>
-              </div>
-            </div>
-          </div>
-
-          <hr class="soft mb-4" />
-
-          <div class="flex items-center justify-between">
-            <span class="text-xs text-gray-400 font-medium">✦ Bukan diagnosis medis</span>
-            <button class="bg-gray-900 text-white text-xs font-semibold px-4 py-2 rounded-full hover:bg-sage-dark transition-colors">
-              Mulai →
-            </button>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-
-    <div class="scroll-hint relative z-10 flex items-center gap-4 px-12 pb-6 text-[10px] uppercase tracking-widest text-gray-400 font-semibold">
-      <div class="flex-1 h-px bg-black/6"></div>
-      scroll ke bawah untuk mengenal lebih lanjut
-      <div class="flex-1 h-px bg-black/6"></div>
-    </div>
-
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       SECTION 2 — TENTANG
-  ════════════════════════════════════════ -->
-  <section id="tentang" class="relative z-10">
-
-    <!-- Hero About -->
-    <div class="about-grid grid grid-cols-2 gap-16 items-center px-12 py-20">
-
-      <!-- KOLOM KIRI (GAMBAR) -->
-      <div class="about-img-col relative h-[420px]">
-        <img src="assets/img/undraw_mindfulness_d853.svg" class="float-a absolute top-0 left-1/3 w-56 z-20" />
-        <img src="assets/img/undraw_distractions_jmxk.svg" class="float-c absolute top-40 left-0 w-44 z-10" />
-        <img src="assets/img/undraw_confident_9v38.svg" class="float-c absolute top-44 right-0 w-44 z-10" />
-      </div>
-
-      <div class="flex flex-col gap-6">
-        <div class="inline-flex items-center gap-2 bg-sage/20 border border-sage/40 text-sage-dark text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full w-fit">
-          <span class="w-1.5 h-1.5 bg-sage-dark rounded-full"></span>
-          Tentang Kami
-        </div>
-
-        <h2 class="about-heading font-serif text-[3rem] leading-[1.15] text-gray-900">
-          Kami percaya setiap<br>
-          remaja berhak untuk<br>
-          <span class="italic text-lav-dark">didengar.</span>
-        </h2>
-
-        <hr class="soft" />
-
-        <p class="text-gray-500 leading-relaxed text-sm">
-          <span class="font-semibold text-gray-800">Tranquillitas</span> lahir dari keprihatinan terhadap tingginya angka masalah kesehatan mental remaja di Indonesia yang kerap tidak terdeteksi dan tidak tertangani. Kami hadir bukan sebagai pengganti profesional, melainkan sebagai langkah pertama — ruang yang aman, hangat, dan bebas stigma.
-        </p>
-
-        <p class="text-gray-500 leading-relaxed text-sm">
-          Nama <span class="font-semibold text-gray-800">Tranquillitas</span> berasal dari bahasa Latin yang berarti <em>ketenangan</em>. Sebuah pengingat bahwa damai itu bukan hal yang mustahil — ia hanya butuh dirawat, perlahan.
-        </p>
-
-        <div class="flex flex-wrap gap-3 mt-2">
-          <a href="#konten" class="flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-sage-dark transition-all hover:-translate-y-0.5 no-underline">
-            Lihat Konten →
-          </a>
-          <a href="#kontak" class="flex items-center gap-2 border border-black/15 text-gray-700 px-6 py-3 rounded-full text-sm font-semibold hover:border-sage-dark hover:bg-sage/10 transition-all hover:-translate-y-0.5 no-underline">
-            Hubungi Kami
-          </a>
-        </div>
-      </div>
-
-    </div>
-
-    <hr class="soft section-px mx-12" />
-
-    <!-- Visi & Misi -->
-    <div class="section-px section-py-sm px-12 py-16">
-      <div class="text-center mb-12">
-        <div class="inline-flex items-center gap-2 bg-lav/20 border border-lav/40 text-lav-dark text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4">
-          ✦ Visi & Misi
-        </div>
-        <h3 class="section-heading font-serif text-[2.2rem] text-gray-900">Mengapa kami ada?</h3>
-      </div>
-
-      <div class="visi-misi-grid grid grid-cols-2 gap-8">
-        <div class="value-card bg-white rounded-3xl p-8 shadow-md shadow-black/10 hover:-translate-y-2 transition-transform duration-300">
-          <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl mb-5"
-               style="background: linear-gradient(135deg, #A8C5A0, #C9B8D8)">🎯</div>
-          <h4 class="font-serif text-xl text-gray-800 mb-3">Visi</h4>
-          <p class="text-sm text-gray-650 leading-relaxed">
-            Mewujudkan generasi muda Indonesia yang sadar, peduli, dan mampu merawat kesehatan mental mereka sendiri — sehingga tidak ada lagi remaja yang merasa sendirian dalam perjuangannya.
-          </p>
-          <div class="mt-5 p-4 bg-lav/20 rounded-2xl">
-            <p class="text-xs text-lav-dark font-semibold italic leading-relaxed">
-              "Satu langkah kecil untuk memahami dirimu adalah langkah besar menuju kesembuhan."
-            </p>
-          </div>
-        </div>
-
-        <div class="value-card bg-white rounded-3xl p-8 shadow-md shadow-black/10 hover:-translate-y-2 transition-transform duration-300">
-          <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl mb-5"
-               style="background: linear-gradient(135deg, #C9B8D8, #E8A598)">🌱</div>
-          <h4 class="font-serif text-xl text-gray-800 mb-3">Misi</h4>
-          <p class="text-sm text-gray-650 leading-relaxed">
-            Menyediakan informasi yang akurat, mudah dipahami, dan bebas stigma seputar kesehatan mental remaja. Kami ingin menjadi jembatan antara remaja yang membutuhkan bantuan dengan sumber daya yang tepat.
-          </p>
-          <ul class="mt-4 flex flex-col gap-2">
-            <li class="flex items-center gap-2 text-xs text-gray-500 font-medium">
-              <span class="w-5 h-5 bg-sage/20 text-sage-dark rounded-full flex items-center justify-center text-xs">✓</span>
-              Edukasi berbasis fakta, bukan stigma
-            </li>
-            <li class="flex items-center gap-2 text-xs text-gray-500 font-medium">
-              <span class="w-5 h-5 bg-sage/20 text-sage-dark rounded-full flex items-center justify-center text-xs">✓</span>
-              Konten yang relevan untuk remaja Indonesia
-            </li>
-            <li class="flex items-center gap-2 text-xs text-gray-500 font-medium">
-              <span class="w-5 h-5 bg-sage/20 text-sage-dark rounded-full flex items-center justify-center text-xs">✓</span>
-              Menghubungkan dengan bantuan profesional
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <hr class="soft mx-12" />
-
-    <!-- Nilai-nilai -->
-    <div class="section-px section-py-sm px-12 py-16">
-      <div class="text-center mb-12">
-        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4"
-             style="color:#c97b6b; border: 1px solid #E8A598; background: #E8A59820">
-          ✦ Nilai Kami
-        </div>
-        <h3 class="section-heading font-serif text-[2.2rem] text-gray-900">Yang kami pegang teguh</h3>
-      </div>
-
-      <div class="nilai-grid grid grid-cols-3 gap-6">
-        <div class="value-card bg-white rounded-2xl p-6 shadow-sm shadow-black/15 text-center">
-          <div class="text-3xl mb-3">🤍</div>
-          <h5 class="font-serif text-lg text-gray-800 mb-2">Tanpa Stigma</h5>
-          <p class="text-xs text-gray-400 leading-relaxed">Setiap perasaan valid. Tidak ada yang lemah karena meminta bantuan.</p>
-        </div>
-        <div class="value-card bg-white rounded-2xl p-6 shadow-sm shadow-black/15 text-center">
-          <div class="text-3xl mb-3">🔒</div>
-          <h5 class="font-serif text-lg text-gray-800 mb-2">Aman & Nyaman</h5>
-          <p class="text-xs text-gray-400 leading-relaxed">Ruang yang bebas dari penghakiman, terbuka untuk semua cerita.</p>
-        </div>
-        <div class="value-card bg-white rounded-2xl p-6 shadow-sm shadow-black/15 text-center">
-          <div class="text-3xl mb-3">📚</div>
-          <h5 class="font-serif text-lg text-gray-800 mb-2">Berbasis Fakta</h5>
-          <p class="text-xs text-gray-400 leading-relaxed">Informasi yang kami sajikan bersumber dari referensi kesehatan terpercaya.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Bottom CTA -->
-    <div class="section-px px-12 pb-16">
-      <div class="bg-white rounded-3xl p-10 shadow-md shadow-black/6 hover:-translate-y-2 transition-transform duration-300 about-cta-grid grid grid-cols-2 gap-10 items-center">
-        <div>
-          <h3 class="font-serif text-[2rem] text-gray-900 mb-4">
-            Bersama, kita bisa<br>
-            <span class="italic text-sage-dark">memutus siklus ini.</span>
-          </h3>
-          <p class="text-sm text-gray-500 leading-relaxed mb-6">
-            Kesehatan mental bukan hal yang tabu. Semakin banyak remaja yang sadar dan berani bicara, semakin besar harapan kita bersama untuk generasi yang lebih sehat secara mental.
-          </p>
-          <div class="about-cta-stats flex gap-8">
-            <div class="text-center">
-              <div class="font-serif text-3xl text-gray-900">2.4rb+</div>
-              <div class="text-xs text-gray-400 mt-0.5">Remaja terbantu</div>
-            </div>
-            <div class="w-px bg-black/8"></div>
-            <div class="text-center">
-              <div class="font-serif text-3xl text-gray-900">50+</div>
-              <div class="text-xs text-gray-400 mt-0.5">Artikel & tips</div>
-            </div>
-            <div class="w-px bg-black/8"></div>
-            <div class="text-center">
-              <div class="font-serif text-3xl text-gray-900">10+</div>
-              <div class="text-xs text-gray-400 mt-0.5">Sumber hotline</div>
-            </div>
-          </div>
-        </div>
-        <div class="about-cta-img flex justify-center">
-          <img
-            src="https://illustrations.popsy.co/amber/woman-meditating.svg"
-            alt="Ilustrasi meditasi"
-            class="w-64 drop-shadow-md"
-          />
-        </div>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       SECTION 3 — KONTEN
-  ════════════════════════════════════════ -->
-  <section id="konten" class="konten-px relative z-10 px-12 py-20">
-
-    <!-- Header -->
-    <div class="text-center mb-12">
-      <div class="inline-flex items-center gap-2 bg-sage/20 border border-sage/40 text-sage-dark text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4">
-        ✦ Konten
-      </div>
-      <h3 class="section-heading font-serif text-[2.2rem] text-gray-900">Baca, Pahami, Tumbuh</h3>
-      <p class="text-gray-400 text-sm mt-2 max-w-md mx-auto">Artikel dan tips seputar kesehatan mental yang dikurasi khusus untuk remaja Indonesia.</p>
-    </div>
-
-    <!-- SLIDESHOW ARTIKEL -->
-    <div style="overflow:hidden; -webkit-mask-image:linear-gradient(to right, transparent, black 8%, black 92%, transparent); mask-image:linear-gradient(to right, transparent, black 8%, black 92%, transparent);">
-      <div id="slideTrack" class="marquee-track">
-        <!-- Cards diisi via JS -->
-      </div>
-    </div>
-
-    <hr class="soft mt-16 mb-16" />
-
-    <!-- MITOS VS FAKTA -->
-    <div class="text-center mb-10">
-      <div class="inline-flex items-center gap-2 bg-lav/20 border border-lav/40 text-lav-dark text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4">
-        ✦ Mitos vs Fakta
-      </div>
-      <h3 class="section-heading font-serif text-[2rem] text-gray-900">Pahami Lebih Lanjut</h3>
-    </div>
-
-    <div class="myths-grid grid grid-cols-2 gap-6">
-
-      <!-- Mitos -->
-      <div class="flex flex-col gap-4">
-        <div class="bg-white rounded-2xl p-5 shadow-sm flex items-start gap-4 value-card">
-          <div class="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-sm font-bold" style="background:#E8A59830; color:#c97b6b">✗</div>
-          <div>
-            <div class="text-xs font-bold uppercase tracking-widest mb-1" style="color:#c97b6b">Mitos</div>
-            <p class="text-sm text-gray-700 font-medium">"Meminta bantuan itu tanda lemah"</p>
-          </div>
-        </div>
-        <div class="bg-white rounded-2xl p-5 shadow-sm flex items-start gap-4 value-card">
-          <div class="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-sm font-bold" style="background:#E8A59830; color:#c97b6b">✗</div>
-          <div>
-            <div class="text-xs font-bold uppercase tracking-widest mb-1" style="color:#c97b6b">Mitos</div>
-            <p class="text-sm text-gray-700 font-medium">"Masalah kesehatan mental remaja hanyalah drama atau perubahan suasana hati (mood swing) biasa karena hormon."</p>
-          </div>
-        </div>
-        <div class="bg-white rounded-2xl p-5 shadow-sm flex items-start gap-4 value-card">
-          <div class="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-sm font-bold" style="background:#E8A59830; color:#c97b6b">✗</div>
-          <div>
-            <div class="text-xs font-bold uppercase tracking-widest mb-1" style="color:#c97b6b">Mitos</div>
-            <p class="text-sm text-gray-700 font-medium">"Masalah kesehatan mental remaja adalah tanda kelemahan pribadi atau kurang iman."</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Fakta -->
-      <div class="flex flex-col gap-4">
-        <div class="bg-white rounded-2xl p-5 shadow-sm flex items-start gap-4 value-card">
-          <div class="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-sm font-bold bg-sage/20 text-sage-dark">✓</div>
-          <div>
-            <div class="text-xs font-bold uppercase tracking-widest text-sage-dark mb-1">Fakta</div>
-            <p class="text-sm text-gray-700 font-medium">"Meminta bantuan adalah tanda keberanian dan kesadaran diri"</p>
-          </div>
-        </div>
-        <div class="bg-white rounded-2xl p-5 shadow-sm flex items-start gap-4 value-card">
-          <div class="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-sm font-bold bg-sage/20 text-sage-dark">✓</div>
-          <div>
-            <div class="text-xs font-bold uppercase tracking-widest text-sage-dark mb-1">Fakta</div>
-            <p class="text-sm text-gray-700 font-medium">"Gangguan kesehatan mental adalah kondisi medis serius, bukan sekadar fase. Separuh dari seluruh kasus gangguan kesehatan mental dimulai pada usia 14 tahun, dan bunuh diri adalah salah satu penyebab utama kematian remaja."</p>
-          </div>
-        </div>
-        <div class="bg-white rounded-2xl p-5 shadow-sm flex items-start gap-4 value-card">
-          <div class="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-sm font-bold bg-sage/20 text-sage-dark">✓</div>
-          <div>
-            <div class="text-xs font-bold uppercase tracking-widest text-sage-dark mb-1">Fakta</div>
-            <p class="text-sm text-gray-700 font-medium">"Gangguan mental adalah kondisi biologis dan psikologis, sama seperti penyakit fisik (seperti asma atau diabetes). Itu bukan tanda kelemahan dan sering membutuhkan perawatan profesional, bukan hanya pemikiran positif."</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- BOOSTER QUOTE -->
-    <div class="mt-10 rounded-3xl p-8 relative overflow-hidden" style="background: linear-gradient(135deg, #A8C5A0, #C9B8D8)">
-      <div class="absolute -top-10 -right-10 w-48 h-48 rounded-full opacity-20" style="background: white"></div>
-      <div class="absolute -bottom-8 -left-8 w-36 h-36 rounded-full opacity-15" style="background: white"></div>
-      <div class="booster-inner relative z-10 flex items-center justify-between gap-12">
-        <div class="flex-1">
-          <div class="text-5xl font-serif text-white/40 leading-none mb-2">❝</div>
-          <p class="booster-heading font-serif text-2xl text-white leading-relaxed">
-            Kesehatan mental remaja adalah prioritas, bukan pilihan,<br>
-            <span class="italic opacity-80">dan mencari bantuan bukanlah tanda kelemahan melainkan keberanian.</span>
-          </p>
-          <div class="mt-6 flex items-center gap-3">
-            <div class="w-8 h-px bg-white/50"></div>
-            <span class="text-xs text-white/70 font-semibold uppercase tracking-widest">Pesan dari Tranquillitas</span>
-          </div>
-        </div>
-        <div class="booster-side flex flex-col gap-4 flex-shrink-0">
-          <div class="bg-white/20 backdrop-blur-sm rounded-2xl px-6 py-4 text-center">
-            <div class="font-serif text-3xl text-white">Kamu</div>
-            <div class="text-xs text-white/70 mt-1 font-medium">bisa melewati ini</div>
-          </div>
-          <a href="#kontak" class="bg-white text-gray-800 text-sm font-semibold px-6 py-3 rounded-full text-center hover:bg-cream transition-colors no-underline block">
-            Cari Bantuan →
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </section>
-
-  <hr class="soft mx-12" />
-
-  <!-- ═══════════════════════════════════════
-       SECTION 4 — KATA MEREKA
-  ════════════════════════════════════════ -->
-  <section id="kata-mereka" class="relative z-10 px-12 py-20">
-
-    <div class="text-center mb-12">
-      <div class="inline-flex items-center gap-2 bg-lav/20 border border-lav/40 text-lav-dark text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4">
-        ✦ Kata Mereka
-      </div>
-      <h3 class="section-heading font-serif text-[2.2rem] text-gray-900">Kata Para Remaja<br><span class="italic text-sage-dark">yang terbantu</span></h3>
-    </div>
-
-    <div class="testi-grid grid grid-cols-3 gap-6">
-
-      <!-- Testimonial 1 -->
-      <div class="value-card bg-white rounded-3xl p-6 shadow-md">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold text-white" style="background: linear-gradient(135deg, #A8C5A0, #7FA878)">A</div>
-          <div>
-            <div class="text-sm font-semibold text-gray-800">Alya, 17</div>
-            <div class="text-xs text-gray-400">Pelajar SMA</div>
-          </div>
-          <div class="ml-auto text-lav text-lg">❝</div>
-        </div>
-        <p class="text-sm text-gray-500 leading-relaxed">"Akhirnya ada tempat yang bisa bantu aku ngerti perasaan sendiri. Artikel-artikelnya mudah dipahami dan ga menghakimi."</p>
-        <div class="flex gap-0.5 mt-4">
-          <span class="text-sage-dark text-sm">★★★★★</span>
-        </div>
-      </div>
-
-      <!-- Testimonial 2 -->
-      <div class="value-card bg-white rounded-3xl p-6 shadow-md">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold text-white" style="background: linear-gradient(135deg, #C9B8D8, #9B85B8)">R</div>
-          <div>
-            <div class="text-sm font-semibold text-gray-800">Rizky, 19</div>
-            <div class="text-xs text-gray-400">Mahasiswa</div>
-          </div>
-          <div class="ml-auto text-lav text-lg">❝</div>
-        </div>
-        <p class="text-sm text-gray-500 leading-relaxed">"Dulu aku kira cuma aku yang ngerasa begini. Tranquillitas bikin aku sadar banyak yang ngalamin hal yang sama."</p>
-        <div class="flex gap-0.5 mt-4">
-          <span class="text-sage-dark text-sm">★★★★★</span>
-        </div>
-      </div>
-
-      <!-- Testimonial 3 -->
-      <div class="value-card bg-white rounded-3xl p-6 shadow-md">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold text-white" style="background: linear-gradient(135deg, #E8A598, #c97b6b)">S</div>
-          <div>
-            <div class="text-sm font-semibold text-gray-800">Sari, 16</div>
-            <div class="text-xs text-gray-400">Pelajar SMP</div>
-          </div>
-          <div class="ml-auto text-lav text-lg">❝</div>
-        </div>
-        <p class="text-sm text-gray-500 leading-relaxed">"Tips-tipsnya simpel tapi beneran berdampak. Sekarang aku lebih bisa manage stress sebelum ujian."</p>
-        <div class="flex gap-0.5 mt-4">
-          <span class="text-sage-dark text-sm">★★★★★</span>
-        </div>
-      </div>
-
-      <!-- Testimonial 4 -->
-      <div class="value-card bg-white rounded-3xl p-6 shadow-md">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold text-white" style="background: linear-gradient(135deg, #A8C5A0, #C9B8D8)">D</div>
-          <div>
-            <div class="text-sm font-semibold text-gray-800">Dimas, 18</div>
-            <div class="text-xs text-gray-400">Pelajar SMA</div>
-          </div>
-          <div class="ml-auto text-lav text-lg">❝</div>
-        </div>
-        <p class="text-sm text-gray-500 leading-relaxed">"Aku share ke temen-temenku karena emang bermanfaat banget. Design-nya juga enak dilihat, ga bikin overwhelmed."</p>
-        <div class="flex gap-0.5 mt-4">
-          <span class="text-sage-dark text-sm">★★★★☆</span>
-        </div>
-      </div>
-
-      <!-- Testimonial 5 -->
-      <div class="value-card bg-white rounded-3xl p-6 shadow-md">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold text-white" style="background: linear-gradient(135deg, #C9B8D8, #E8A598)">N</div>
-          <div>
-            <div class="text-sm font-semibold text-gray-800">Nadia, 20</div>
-            <div class="text-xs text-gray-400">Mahasiswa</div>
-          </div>
-          <div class="ml-auto text-lav text-lg">❝</div>
-        </div>
-        <p class="text-sm text-gray-500 leading-relaxed">"Bagian mitos vs fakta beneran buka mataku. Banyak hal yang selama ini aku salah paham soal kesehatan mental."</p>
-        <div class="flex gap-0.5 mt-4">
-          <span class="text-sage-dark text-sm">★★★★★</span>
-        </div>
-      </div>
-
-      <!-- Testimonial 6 -->
-      <div class="value-card bg-white rounded-3xl p-6 shadow-md">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold text-white" style="background: linear-gradient(135deg, #7FA878, #A8C5A0)">F</div>
-          <div>
-            <div class="text-sm font-semibold text-gray-800">Fauzan, 17</div>
-            <div class="text-xs text-gray-400">Pelajar SMA</div>
-          </div>
-          <div class="ml-auto text-lav text-lg">❝</div>
-        </div>
-        <p class="text-sm text-gray-500 leading-relaxed">"Setelah baca di sini, aku akhirnya berani cerita ke orang tua. Ternyata mereka bisa ngerti kok kalau disampaikan dengan benar."</p>
-        <div class="flex gap-0.5 mt-4">
-          <span class="text-sage-dark text-sm">★★★★★</span>
-        </div>
-      </div>
-
-    </div>
-
-  </section>
-
-  <hr class="soft mx-12" />
-
-  <!-- ═══════════════════════════════════════
-       SECTION 5 — KONTAK
-  ════════════════════════════════════════ -->
-  <section id="kontak" class="relative z-10 px-12 py-20">
-
-    <div class="text-center mb-12">
-      <div class="inline-flex items-center gap-2 bg-lav/20 border border-lav/40 text-lav-dark text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4">
-        ✦ Kontak
-      </div>
-      <h3 class="section-heading font-serif text-[2.2rem] text-gray-900">Butuh bantuan?<br><span class="italic text-lav-dark">Kami siap mendengar.</span></h3>
-    </div>
-
-    <div class="kontak-grid grid grid-cols-2 gap-10">
-
-      <!-- FORM -->
-      <div class="bg-white rounded-3xl p-7 shadow-xl">
-        <h4 class="font-serif text-xl text-gray-800 mb-6">Kirim Pesan</h4>
-
-        <div class="flex flex-col gap-4">
-          <div>
-            <label class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1.5 block">Nama</label>
-            <input type="text" placeholder="Nama kamu..." class="w-full px-4 py-3 rounded-xl border border-black/10 text-sm text-gray-700 bg-cream placeholder-gray-300 focus:outline-none focus:border-sage-dark transition-colors" />
-          </div>
-          <div>
-            <label class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1.5 block">Email</label>
-            <input type="email" placeholder="email@kamu.com" class="w-full px-4 py-3 rounded-xl border border-black/10 text-sm text-gray-700 bg-cream placeholder-gray-300 focus:outline-none focus:border-sage-dark transition-colors" />
-          </div>
-          <div>
-            <label class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1.5 block">Pesan</label>
-            <textarea rows="4" placeholder="Ceritakan apa yang ingin kamu sampaikan..." class="w-full px-4 py-3 rounded-xl border border-black/10 text-sm text-gray-700 bg-cream placeholder-gray-300 focus:outline-none focus:border-sage-dark transition-colors resize-none"></textarea>
-          </div>
-          <button class="w-full bg-gray-900 text-white py-3 rounded-xl text-sm font-semibold hover:bg-sage-dark transition-all hover:-translate-y-0.5 mt-2">
-            Kirim Pesan →
-          </button>
-        </div>
-      </div>
-
-      <!-- HOTLINE -->
-      <div class="flex flex-col gap-5">
-        <div class="bg-white rounded-3xl p-6 shadow-md value-card">
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl flex-shrink-0" style="background: linear-gradient(135deg, #A8C5A0, #C9B8D8)">📞</div>
-            <div>
-              <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-0.5">Into The Light</div>
-              <div class="font-serif text-lg text-gray-800">+62 13456-78</div>
-              <div class="text-xs text-gray-400 mt-0.5">Layanan kesehatan jiwa 24 jam</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 shadow-md value-card">
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl flex-shrink-0" style="background: linear-gradient(135deg, #C9B8D8, #E8A598)">💬</div>
-            <div>
-              <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-0.5">Yayasan Pulih</div>
-              <div class="font-serif text-lg text-gray-800">(021) 788-42580</div>
-              <div class="text-xs text-gray-400 mt-0.5">Konseling & dukungan psikologis</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 shadow-md value-card">
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl flex-shrink-0" style="background: linear-gradient(135deg, #E8A598, #A8C5A0)">🤝</div>
-            <div>
-              <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-0.5">Kemenkes RI</div>
-              <div class="font-serif text-lg text-gray-800">1520-969</div>
-              <div class="text-xs text-gray-400 mt-0.5">Hotline kesehatan nasional</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-sage/10 border border-sage/30 rounded-2xl p-5 mt-2">
-          <p class="text-xs text-sage-dark font-medium leading-relaxed">
-            🌿 <span class="font-bold">Ingat:</span> Menghubungi layanan bantuan bukan tanda kelemahan. Itu adalah langkah berani pertama menuju pemulihan.
-          </p>
-        </div>
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="relative z-10 border-t border-black/5 px-12 py-8 mt-8">
-    <div class="footer-inner flex items-center justify-between">
-      <div class="flex items-center gap-2 font-serif text-xl text-gray-700">
-        <span class="w-5 h-5 rounded-full inline-block" style="background: radial-gradient(circle at 35% 35%, #E8A598, #c97b6b)"></span>
-        Tranquillitas
-      </div>
-      <p class="text-xs text-gray-300">© 2026 Tranquillitas. Dibuat dengan 💜 untuk remaja Indonesia.</p>
-      <div class="footer-links flex gap-6">
-        <a href="#beranda" class="text-xs text-gray-400 hover:text-gray-700 no-underline transition-colors">Beranda</a>
-        <a href="#tentang" class="text-xs text-gray-400 hover:text-gray-700 no-underline transition-colors">Tentang</a>
-        <a href="#konten" class="text-xs text-gray-400 hover:text-gray-700 no-underline transition-colors">Konten</a>
-        <a href="#kontak" class="text-xs text-gray-400 hover:text-gray-700 no-underline transition-colors">Kontak</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ─── SCRIPTS ─── -->
   <script>
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        const target = document.querySelector(link.getAttribute('href'));
-        if (!target) return;
-        const navHeight = document.querySelector('nav').offsetHeight;
-        const top = target.getBoundingClientRect().top + window.scrollY - navHeight;
-        window.scrollTo({ top, behavior: 'smooth' });
-        // close mobile menu if open
-        closeMobileMenu();
-      });
-    });
+    const wrapper = document.getElementById('splashWrapper');
+    const bar     = document.getElementById('barFill');
 
-    // Hamburger menu
-    const hamburgerBtn  = document.getElementById('hamburgerBtn');
-    const mobileMenu    = document.getElementById('mobileMenu');
-    const bar1 = document.getElementById('bar1');
-    const bar2 = document.getElementById('bar2');
-    const bar3 = document.getElementById('bar3');
-    let menuOpen = false;
+    // Loading bar mulai jalan
+    setTimeout(() => bar.style.width = '100%', 300);
 
-    function openMobileMenu() {
-      menuOpen = true;
-      mobileMenu.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      bar1.style.cssText = 'transform: translateY(8px) rotate(45deg); width: 24px;';
-      bar2.style.cssText = 'opacity: 0; transform: scaleX(0);';
-      bar3.style.cssText = 'transform: translateY(-8px) rotate(-45deg); width: 24px;';
-    }
+    // Slide wrapper ke atas setelah 3 detik
+    setTimeout(() => wrapper.classList.add('leaving'), 3200);
 
-    function closeMobileMenu() {
-      menuOpen = false;
-      mobileMenu.classList.remove('open');
-      document.body.style.overflow = '';
-      bar1.style.cssText = '';
-      bar2.style.cssText = '';
-      bar3.style.cssText = '';
-    }
-
-    hamburgerBtn.addEventListener('click', () => {
-      menuOpen ? closeMobileMenu() : openMobileMenu();
-    });
-  </script>
-
-  <script>
-    // ─── DATA ARTIKEL ───────────────────────────────────────────
-    const articles = [
-      {
-        img:   'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=600&q=80',
-        tag:   'Kesadaran Diri',
-        color: '#7FA878',
-        bg:    '#A8C5A025',
-        title: '5 Tanda Kamu Perlu Istirahat Mental',
-        desc:  'Tubuh dan pikiran punya caranya sendiri untuk minta tolong. Kenali tanda-tandanya sebelum terlambat.',
-        time:  '5 menit baca',
-      },
-      {
-        img:   'https://images.unsplash.com/photo-1493836512294-502baa1986e2?w=600&q=80',
-        tag:   'Anxiety',
-        color: '#9B85B8',
-        bg:    '#C9B8D825',
-        title: 'Cara Mengelola Anxiety Sebelum Ujian',
-        desc:  'Grogi sebelum ujian itu normal. Tapi kalau sudah mengganggu, ada cara sederhana yang bisa dicoba.',
-        time:  '4 menit baca',
-      },
-      {
-        img:   'https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?w=600&q=80',
-        tag:   'Edukasi',
-        color: '#c97b6b',
-        bg:    '#E8A59825',
-        title: 'Bedanya Sedih Biasa vs Depresi',
-        desc:  'Tidak semua kesedihan adalah depresi. Memahami perbedaannya penting untuk mencari bantuan yang tepat.',
-        time:  '6 menit baca',
-      },
-      {
-        img:   'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80',
-        tag:   'Self-care',
-        color: '#7FA878',
-        bg:    '#A8C5A025',
-        title: 'Rutinitas Pagi yang Menenangkan Pikiran',
-        desc:  'Memulai hari dengan tenang bisa mengubah banyak hal. Ini rutinitas sederhana yang bisa langsung dicoba.',
-        time:  '3 menit baca',
-      },
-      {
-        img:   'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80',
-        tag:   'Sosial',
-        color: '#9B85B8',
-        bg:    '#C9B8D825',
-        title: 'Cara Bicara ke Orang Tua soal Kesehatan Mental',
-        desc:  'Memulai percakapan ini memang sulit, tapi ada cara yang bisa membantu kamu menyampaikannya.',
-        time:  '5 menit baca',
-      },
-      {
-        img:   'https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=600&q=80',
-        tag:   'Mindfulness',
-        color: '#7FA878',
-        bg:    '#A8C5A025',
-        title: 'Meditasi 5 Menit untuk Pikiran Tenang',
-        desc:  'Tidak perlu berjam-jam. Lima menit meditasi sederhana bisa mengubah keseluruhan harimu.',
-        time:  '4 menit baca',
-      },
-      {
-        img:   'https://images.unsplash.com/photo-1456324504439-367cee3b3c32?w=600&q=80',
-        tag:   'Produktivitas',
-        color: '#9B85B8',
-        bg:    '#C9B8D825',
-        title: 'Burnout di Usia Muda: Kenali dan Atasi',
-        desc:  'Burnout bukan hanya milik orang dewasa. Remaja pun bisa mengalaminya dan perlu tahu cara mengatasinya.',
-        time:  '6 menit baca',
-      },
-      {
-        img:   'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&q=80',
-        tag:   'Motivasi',
-        color: '#c97b6b',
-        bg:    '#E8A59825',
-        title: 'Mengapa Self-Compassion Itu Penting',
-        desc:  'Bersikap baik pada diri sendiri bukan kelemahan. Ini adalah fondasi dari kesehatan mental yang kuat.',
-        time:  '5 menit baca',
-      },
-    ];
-
-    // ─── BUILD CARD ──────────────────────────────────────────────
-    function buildCard(c) {
-      const el = document.createElement('div');
-      el.style.cssText = `
-        background    : white;
-        border-radius : 24px;
-        overflow      : hidden;
-        box-shadow    : 0 4px 20px rgba(0,0,0,0.06);
-        cursor        : pointer;
-        flex-shrink   : 0;
-        width         : 260px;
-        transition    : transform 0.25s ease, box-shadow 0.25s ease;
-      `;
-      el.onmouseenter = () => {
-        el.style.transform = 'translateY(-6px)';
-        el.style.boxShadow = '0 20px 40px rgba(0,0,0,0.1)';
-      };
-      el.onmouseleave = () => {
-        el.style.transform = '';
-        el.style.boxShadow = '';
-      };
-      el.innerHTML = `
-        <div style="height:150px; overflow:hidden;">
-          <img
-            src="${c.img}"
-            alt="${c.title}"
-            style="width:100%; height:100%; object-fit:cover; transition:transform 0.5s ease;"
-            onmouseenter="this.style.transform='scale(1.07)'"
-            onmouseleave="this.style.transform=''"
-          />
-        </div>
-        <div style="padding:18px;">
-          <span style="
-            font-size     : 10px;
-            font-weight   : 700;
-            padding       : 3px 10px;
-            border-radius : 999px;
-            background    : ${c.bg};
-            color         : ${c.color};
-            letter-spacing: 0.05em;
-          ">${c.tag}</span>
-          <h4 style="
-            font-family : 'DM Serif Display', serif;
-            font-size   : 14px;
-            color       : #1f2937;
-            margin      : 10px 0 6px;
-            line-height : 1.35;
-          ">${c.title}</h4>
-          <p style="
-            font-size   : 11px;
-            color       : #9ca3af;
-            line-height : 1.6;
-            margin-bottom: 14px;
-          ">${c.desc}</p>
-          <div style="display:flex; align-items:center; justify-content:space-between;">
-            <span style="font-size:11px; color:#d1d5db;">${c.time}</span>
-            <button style="
-              font-size  : 11px;
-              font-weight: 600;
-              color      : ${c.color};
-              background : none;
-              border     : none;
-              cursor     : pointer;
-            ">Baca →</button>
-          </div>
-        </div>
-      `;
-      return el;
-    }
-
-    // ─── INJECT KE TRACK ────────────────────────────────────────
-    const track = document.getElementById('slideTrack');
-    [...articles, ...articles].forEach(c => track.appendChild(buildCard(c)));
-  </script>
-
-   <!-- ─── SCROLL REVEAL ENGINE ─── -->
-  <script>
-  (function() {
-
-    // Helper: assign scroll-reveal classes to matched elements
-    function sr(selector, direction, stagger) {
-      document.querySelectorAll(selector).forEach((el, i) => {
-        el.classList.add('sr', 'sr-' + direction);
-        if (stagger) el.style.transitionDelay = (i * stagger) + 'ms';
-      });
-    }
-
-    // ── HERO (scroll-hint only, hero already has fade-up) ──
-    sr('.scroll-hint', 'up');
-
-    // ── TENTANG ──
-    sr('#tentang .about-img-col', 'left');
-    sr('#tentang .about-grid > div:nth-child(2)', 'right');
-    sr('#tentang .text-center', 'up');
-    sr('.visi-misi-grid > div', 'up', 200);
-    sr('.nilai-grid > div', 'up', 150);
-    sr('.about-cta-grid', 'zoom');
-
-    // ── KONTEN ──
-    sr('#konten > .text-center', 'up');
-    // slideshow container
-    const slideEl = document.getElementById('slideTrack');
-    if (slideEl && slideEl.parentElement) {
-      slideEl.parentElement.classList.add('sr', 'sr-up');
-    }
-    sr('.myths-grid > div:first-child > div', 'left', 120);
-    sr('.myths-grid > div:last-child > div', 'right', 120);
-    sr('#konten > .rounded-3xl', 'scale');
-
-    // ── KATA MEREKA ──
-    sr('#kata-mereka > .text-center', 'up');
-    sr('.testi-grid > div', 'up', 100);
-
-    // ── KONTAK ──
-    sr('#kontak > .text-center', 'up');
-    sr('.kontak-grid > div:first-child', 'left');
-    sr('.kontak-grid > div:last-child > div', 'right', 100);
-
-    // ── INTERSECTION OBSERVER ──
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('sr-visible');
-
-          // After transition ends, remove all sr classes
-          // so hover effects (value-card etc.) work normally again
-          entry.target.addEventListener('transitionend', () => {
-            entry.target.classList.remove(
-              'sr', 'sr-visible',
-              'sr-up', 'sr-down', 'sr-left', 'sr-right',
-              'sr-scale', 'sr-zoom'
-            );
-            entry.target.style.willChange = '';
-            entry.target.style.transitionDelay = '';
-          }, { once: true });
-
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.08,
-      rootMargin: '0px 0px -60px 0px'
-    });
-
-    document.querySelectorAll('.sr').forEach(el => observer.observe(el));
-
-  })();
+    // Redirect ke index.html setelah animasi selesai
+    setTimeout(() => window.location.href = 'index.html', 4050);
   </script>
 
 </body>
